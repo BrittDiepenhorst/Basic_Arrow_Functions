@@ -46,8 +46,7 @@ const impeachTrumpSplice = function (array) {
 console.log(impeachTrumpSlice(presidents)); // ["Obama", "Bush", "Clinton"]
 console.log(impeachTrumpSplice(presidents)); // ["Obama", "Bush", "Clinton"]
 
-// .slice no mutation and .splice is mutation 
-// !! resultaat niet gelukt: undefined
+// .slice muteert niet de bestaande array, maarr retourneert een nieuwe die we opslaan in een nieuwe variabele.
 
 
 // F Write a simple JavaScript program to join all elements of the following array into a string (with spaces). ps: deze opdracht hebben we in het Engels gelaten omdat er een dikke tip in zit over welke array method je gaat gebruiken.
