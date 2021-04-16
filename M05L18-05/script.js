@@ -138,37 +138,52 @@ console.log(firstAppearance);
 
 // #5 Maak een array met alle superhelden van DC Comics. Is dat gelukt? Herhaal de bovenstaande functie dan en maak ook een array met alle superhelden van Marvel Comics.
 const DCComics = superheroes.filter((superheroe) => {
-    return superheroe.publisher == "DC Comics"
+    return superheroe.publisher === "DC Comics"
 })
 
 console.log(DCComics);
 
 const MarvelComics = superheroes.filter((superheroe) => {
-    return superheroe.publisher == "Marvel Comics"
+    return superheroe.publisher === "Marvel Comics"
 })
 
 console.log(MarvelComics);
 
 // #6 Tel het gewicht van alle superhelden van DC Comics bij elkaar op. Let op! Conditionals to the rescue! Het gewicht dat je hier ziet, van welk datatype is dat? Een nummer? Of een string? Oh ja, en hebben alle superhelden wel een gewicht?
-const totalWeightDCComics = superheroes.filter((superheroe) => {
-    return superheroe.publisher == "DC Comics"
-}).reduce((currentTotal, superheroe) => {
-    return superheroe.weight + currentTotal
-}, 0);
+// De superhero weights zijn in de data opgenomen als strings, e.g.: '40'
+// Deze moet je eve nparsen naar een integer, zodat je er mee kunt rekenen.
 
-console.log(totalWeightDCComics);
+const addedWeightDC = DCComics.map(superheroe => {
+    return superheroe.weight !== "unknown" ? parseInt(superheroe.weight, 10) : 0;
+}).reduce((weight1, weight2) => weight1 + weight2);
 
-// result is incorrect: 1451651951861952202100
+console.log("TotalWeight of DC Comics - supersmall version:", addedWeightDC);
 
 // #7 Doe hetzelfde met alle superhelden van Marvel Comics
-const totalWeightMarvelComics = superheroes.filter((superheroe) => {
-    return superheroe.publisher == "Marvel Comics"
-}).reduce((currentTotal, superheroe) => {
-    return superheroe.weight + currentTotal
-}, 0);
+const addedWeightMarvel = MarvelComics.map(superheroe => {
+    return superheroe.weight !== "unknown" ? parseInt(superheroe.weight, 10) : 0;
+}).reduce((weight1, weight2) => weight1 + weight2);
 
-console.log(totalWeightMarvelComics);
-
-// result is incorrect: unknown20020014002002502201670 
+console.log("TotalWeight of Marvel:", addedWeightMarvel);
 
 // #8 Bonus: zoek de zwaarste superheld!
+// First cast all values to a number or 0 if unknown
+const allSuperheroes = superheroes.map(superheroe => {
+    const weight = superheroe.weight !== "unknown" ? parseInt(superheroe.weight) : 0;
+    superheroe.weight = weight;
+    return superheroe;
+});
+// next, use reduce to find the largest value
+const heaviestSuperheroe = allSuperheroes.reduce(
+    (currentHeaviestSuperheroe, currentSuperheroe) => {
+        if (currentSuperheroe > currentHeaviestSuperheroe.weight) {
+            return currentSuperheroe;
+        } else {
+            return currentHeaviestSuperheroe;
+        }
+    },
+    allSuperheroes[0]
+);
+// met deze laatste waarde geef je aan wat de initiele waarde moet zijn van de functie
+
+console.log("Heaviest Superheroe:", heaviestSuperheroe);
