@@ -47,15 +47,25 @@ console.log(isItalyInTheGreat7);
 // result true
 
 // E In een array met integers. Schrijf een JavaScript functie die elke integer vertienvoudigt. Gebruik .forEach.
-const items1 = [1, 4, 3, 6, 9, 7, 11]
+// met .forEah method
+const tenfold = function (array) {
+    let newArray = [];
+    array.forEach(number => {
+        newArray.push(number * 10);
+    });
+    return newArray;
+};
+// met .map method
+const tenfoldMap = function (array) {
+    return array.map(number => {
+        return number * 10;
+    });
+};
 
-const tenfold = items1.forEach((item1) => {
-    return item1 * 10
-});
+console.log("tenfold", tenfold([1, 4, 3, 6, 9, 7, 11]));
+console.log("tenfold", tenfoldMap([1, 4, 3, 6, 9, 7, 11]));
 
-console.log(tenfold)
 // result should be [10, 40, 30, 60, 90, 70, 110]
-// niet gelukt; undefined
 
 //F In een array met integers. Schrijf een JavaScript functie die checkt of alle waardes in de array onder de 100 zijn, en true or false retourneert.
 const items = [1, 81, 4, 53, 3, 6, 79, 2, 43, 7, 28, 101, 11, 77, 84, 98]
